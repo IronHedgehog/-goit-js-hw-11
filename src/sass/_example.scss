@@ -87,3 +87,32 @@ button {
   border-radius: 0px 5px 5px 0px;
   border: 1px solid gray;
 }
+body {
+  text-align: center;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(120, 120, 148, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+.load-more {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  padding: 20px 30px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-image: linear-gradient(to right, #9eefe1 0%, #4830f0 51%, #9eefe1 100%);
+  background-size: 200% auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+.load-more {
+  background-position: right center;
+}

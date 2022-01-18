@@ -15,17 +15,15 @@ btn.addEventListener('click', clickButton);
 
 async function clickButton() {
   feach.increment();
-  feach.searchImage().then(data => {
-    iterator = 40 + iterator;
-
-    if (iterator >= data.totalHits) {
-      Notiflix.Report.warning(`We're sorry, but you've reached the end of search results.`);
-      btn.classList.add('is-hidden');
-    }
-
-    const markup = template(data.hits);
-    gallery.insertAdjacentHTML('beforeend', markup);
-  });
+  const clickOnButtonSearch = await feach.searchImage();
+  const fetchImage = clickOnButtonSearch.hits;
+  const markup = template(fetchImage);
+  gallery.insertAdjacentHTML('beforeend', markup);
+  iterator = 40 + iterator;
+  if (iterator >= clickOnButtonSearch.totalHits) {
+    Notiflix.Report.warning(`We're sorry, but you've reached the end of search results.`);
+    btn.classList.add('is-hidden');
+  }
 }
 
 form.addEventListener('submit', formSubmit);
@@ -38,7 +36,6 @@ async function formSubmit(e) {
   feach.inputValue = inputEl;
   if (inputEl === '') {
     gallery.innerHTML = '';
-
     return;
   }
 
