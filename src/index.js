@@ -42,6 +42,8 @@ async function formSubmit(e) {
 
   const image = await feach.searchImage();
   const renderImages = await image.hits;
+  const markup = template(renderImages);
+  gallery.insertAdjacentHTML('beforeend', markup);
 
   if (feach.pages >= 1) {
     btn.classList.remove('is-hidden');
@@ -56,7 +58,5 @@ async function formSubmit(e) {
     return;
   }
 
-  const markup = template(renderImages);
-  gallery.insertAdjacentHTML('beforeend', markup);
   let lightbox = new SimpleLightbox('.gallery a');
 }
