@@ -5,6 +5,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import template from './template.hbs';
 import Notiflix from 'notiflix';
+
 const form = document.querySelector('.search-form');
 const input = document.querySelector('input');
 const gallery = document.querySelector('.gallery');
@@ -21,7 +22,7 @@ async function clickButton() {
   gallery.insertAdjacentHTML('beforeend', markup);
   iterator = 40 + iterator;
   if (iterator >= clickOnButtonSearch.totalHits) {
-    Notiflix.Report.warning(`We're sorry, but you've reached the end of search results.`);
+    Notiflix.Notify.warning(`We're sorry, but you've reached the end of search results.`);
     btn.classList.add('is-hidden');
   }
 }
