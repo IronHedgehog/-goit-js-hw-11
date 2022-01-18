@@ -44,6 +44,7 @@ async function formSubmit(e) {
   const renderImages = await image.hits;
   const markup = template(renderImages);
   gallery.insertAdjacentHTML('beforeend', markup);
+  Notiflix.Notify.success(`Hooray! We found ${image.total} images.`);
 
   if (feach.pages >= 1) {
     btn.classList.remove('is-hidden');
