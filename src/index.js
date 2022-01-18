@@ -37,6 +37,7 @@ async function formSubmit(e) {
   const inputEl = input.value.trim();
   feach.inputValue = inputEl;
   if (inputEl === '') {
+    btn.classList.add('is-hidden');
     gallery.innerHTML = '';
     return;
   }
@@ -53,7 +54,6 @@ async function formSubmit(e) {
   }
 
   if (renderImages.length === 0) {
-    btn.classList.add('is-hidden');
     gallery.innerHTML = '';
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.',
