@@ -5,7 +5,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import template from './template.hbs';
 import Notiflix from 'notiflix';
-import axios from 'axios';
 const form = document.querySelector('.search-form');
 const input = document.querySelector('input');
 const gallery = document.querySelector('.gallery');
@@ -14,7 +13,7 @@ const btn = document.querySelector('.load-more');
 let iterator = 40;
 btn.addEventListener('click', clickButton);
 
-function clickButton() {
+async function clickButton() {
   feach.increment();
   feach.searchImage().then(data => {
     iterator = 40 + iterator;
@@ -31,7 +30,7 @@ function clickButton() {
 
 form.addEventListener('submit', formSubmit);
 
-function formSubmit(e) {
+async function formSubmit(e) {
   e.preventDefault();
   feach.resetPage();
   gallery.innerHTML = '';
@@ -43,24 +42,23 @@ function formSubmit(e) {
     return;
   }
 
-  feach.searchImage().then(data => {
-    if (feach.pages >= 1) {
-      btn.classList.remove('is-hidden');
-    }
+  const image = await feach.searchImage();
+  const renderImages = await image.hits;
 
-    if (data.hits.length === 0) {
-      btn.classList.add('is-hidden');
-      gallery.innerHTML = '';
-      console.log();
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.',
-      );
+  if (feach.pages >= 1) {
+    btn.classList.remove('is-hidden');
+  }
 
-      return;
-    }
+  if (renderImages.length === 0) {
+    btn.classList.add('is-hidden');
+    gallery.innerHTML = '';
+    Notiflix.Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.',
+    );
+    return;
+  }
 
-    const markup = template(data.hits);
-    gallery.insertAdjacentHTML('beforeend', markup);
-    let lightbox = new SimpleLightbox('.gallery a');
-  });
+  const markup = template(renderImages);
+  gallery.insertAdjacentHTML('beforeend', markup);
+  let lightbox = new SimpleLightbox('.gallery a');
 }

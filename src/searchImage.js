@@ -1,17 +1,25 @@
 import axios from 'axios';
-
+const BASIC_URL = 'https://pixabay.com/api/';
+const API_KEY = '25303063-e3dfa67f3227afe1b77421770';
 export default class Feach {
   constructor() {
     this.page = 1;
     this.inputEl = '';
   }
 
-  searchImage() {
-    return fetch(
-      `https://pixabay.com/api/?key=25274057-dba1b364b326199f79c25f588&q=${this.inputEl}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`,
-    ).then(response => {
-      return response.json();
-    });
+  async searchImage() {
+    try {
+      const rFetch = await axios.get(
+        `${BASIC_URL}?key=${API_KEY}&q=${this.inputEl}&image_type=photo&orientation=horizontal&safesearch=true
+        &per_page=40&page=${this.page}
+        `,
+      );
+      console.log(rFetch);
+      const neededFiles = rFetch.data;
+      return neededFiles;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   increment() {
@@ -31,6 +39,9 @@ export default class Feach {
   }
 
   get pages() {
-    return (this.page = 1);
+    return this.page;
+  }
+  set pages(newPage) {
+    this.pages = newPage;
   }
 }
