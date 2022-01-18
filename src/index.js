@@ -20,6 +20,7 @@ async function clickButton() {
   const fetchImage = clickOnButtonSearch.hits;
   const markup = template(fetchImage);
   gallery.insertAdjacentHTML('beforeend', markup);
+  let lightbox = new SimpleLightbox('.gallery a');
   iterator = 40 + iterator;
   if (iterator >= clickOnButtonSearch.totalHits) {
     Notiflix.Notify.warning(`We're sorry, but you've reached the end of search results.`);
@@ -44,6 +45,7 @@ async function formSubmit(e) {
   const renderImages = await image.hits;
   const markup = template(renderImages);
   gallery.insertAdjacentHTML('beforeend', markup);
+  // let lightbox = new SimpleLightbox('.gallery a');
   Notiflix.Notify.success(`Hooray! We found ${image.total} images.`);
 
   if (feach.pages >= 1) {
@@ -58,6 +60,4 @@ async function formSubmit(e) {
     );
     return;
   }
-
-  let lightbox = new SimpleLightbox('.gallery a');
 }
