@@ -45,7 +45,7 @@ async function formSubmit(e) {
   const renderImages = await image.hits;
   const markup = template(renderImages);
   gallery.insertAdjacentHTML('beforeend', markup);
-  // let lightbox = new SimpleLightbox('.gallery a');
+  let lightbox = new SimpleLightbox('.gallery a');
   Notiflix.Notify.success(`Hooray! We found ${image.total} images.`);
 
   if (feach.pages >= 1) {
